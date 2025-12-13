@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body { font-family: Arial; background:#eef2f3; padding:20px; }
+        .top { display:flex; justify-content:space-between; align-items:center; }
+        .btn { padding:10px 15px; background:#4CAF50; color:white; border:none; border-radius:5px; text-decoration:none; }
+        .logout { background:#f44336; }
+        .task { background:white; padding:15px; margin-top:15px; border-radius:8px; box-shadow:0 0 5px rgba(0,0,0,0.1); }
+        .delete { color:red; float:right; text-decoration:none; }
+    </style>
+</head>
+<body>
+
+    <div class="top">
+        <h2>Your Tasks</h2>
+        <div>
+            <a class="btn" href="/create/">+ Add Task</a>
+            <a class="btn logout" href="/logout/">Logout</a>
+        </div>
+    </div>
+
+    {% for task in tasks %}
+        <div class="task">
+            <strong>{{ task.title }}</strong>
+            <a class="delete" href="/delete/{{ task.id }}/">Delete</a>
+            <p>{{ task.description }}</p>
+            <small>Reminder: {{ task.remind_at }}</small>
+        </div>
+    {% empty %}
+        <p>No tasks yet. Create one!</p>
+    {% endfor %}
+
+</body>
+</html>
